@@ -6,24 +6,24 @@ function normalizeHtml(str: string): string {
   return str && str.replace(/&nbsp;|\u202F|\u00A0/g, ' ');
 }
 
-function replaceCaret(el: HTMLElement) {
-  // Place the caret at the end of the element
-  const target = document.createTextNode('');
-  el.appendChild(target);
-  // do not move caret if element was not focused
-  const isTargetFocused = document.activeElement === el;
-  if (target !== null && target.nodeValue !== null && isTargetFocused) {
-    var sel = window.getSelection();
-    if (sel !== null) {
-      var range = document.createRange();
-      range.setStart(target, target.nodeValue.length);
-      range.collapse(true);
-      sel.removeAllRanges();
-      sel.addRange(range);
-    }
-    if (el instanceof HTMLElement) el.focus();
-  }
-}
+// function replaceCaret(el: HTMLElement) {
+//   // Place the caret at the end of the element
+//   const target = document.createTextNode('');
+//   el.appendChild(target);
+//   // do not move caret if element was not focused
+//   const isTargetFocused = document.activeElement === el;
+//   if (target !== null && target.nodeValue !== null && isTargetFocused) {
+//     var sel = window.getSelection();
+//     if (sel !== null) {
+//       var range = document.createRange();
+//       range.setStart(target, target.nodeValue.length);
+//       range.collapse(true);
+//       sel.removeAllRanges();
+//       sel.addRange(range);
+//     }
+//     if (el instanceof HTMLElement) el.focus();
+//   }
+// }
 
 /**
  * A simple component for an html element with editable contents.
@@ -90,7 +90,7 @@ export default class ContentEditable extends React.Component<Props> {
       el.innerHTML = this.props.html;
     }
     this.lastHtml = this.props.html;
-    replaceCaret(el);
+    // replaceCaret(el);
   }
 
   emitChange = (originalEvt: React.SyntheticEvent<any>) => {
